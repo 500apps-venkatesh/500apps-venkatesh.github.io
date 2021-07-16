@@ -1,548 +1,514 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>BOTUP</title>
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <title>Gmail settings</title>
+    <!-- Libs CSS -->
+    <link rel="stylesheet" href="https://dashkit.goodthemes.co/assets/fonts/feather/feather.css" />
+    <link rel="stylesheet" href="https://500apps.com/themes/icons-gray.css">
     <div id="app"></div>
-
     <script>
-        ((b, o, t, u, p, c) => {
-            c = o.getElementsByTagName("head")[0];
-            p = o.createElement("script");
-            p.async = 1;
-            p.src = t + u;
-            p.onload = () => {
-                b._Botup.init('5392571224965901','915','qa');
-            };
-            c.appendChild(p);
-        })(window, document, "", "/dist/botupchat.js");
+      ((b, o, t, u, p, c) => {
+        c = o.getElementsByTagName("head")[0];
+        p = o.createElement("script");
+        p.async = 1;
+        p.src = t + u;
+        p.onload = () => {
+          b._Botup.init("6961464327733289", 271, "dev");
+        };
+        c.appendChild(p);
+      })(window, document, "", "/dist/botupchat.js");
     </script>
-</head>
+ <style type="text/css">
+ p{
+  margin-bottom: 0;
+}
+body {
+    margin: 0;
+    font-family: "Cerebri Sans",sans-serif;
+    font-size: .9375rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #12263f;
+    text-align: left;
+    background-color: #f9fbfd;
+    box-sizing: border-box;
+}
+.row{
+    display: flex;
+    flex-wrap: wrap;
+   }
+.card-fill {
+    height: calc(100% - 1.5rem);
+}
+.card-text:last-child {
+    margin-bottom: 0;
+    margin-top: 0;
+}
+.text-body {
+    color: #12263f!important;
+}
+.card {
+    margin-bottom: 1.5rem;
+    border-color: #edf2f9;
+    box-shadow: 0 0.75rem 1.5rem rgba(18,38,63,.03);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid #edf2f9;
+    border-radius: .5rem;
+}
+.card>* {
+    flex-shrink: 0;
+}
+.card-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 60px;
+       padding: 0.5rem 1.5rem;
+    margin-bottom: 0;
+    background-color: transparent;
+    border-bottom: 1px solid #edf2f9;
+}
+.card-header>:first-child {
+    flex: 1;
+}
+h4,h5{
+  letter-spacing: -.02em;
+   margin-top: 0;
+  margin-bottom:0;
+}
+h4{
+  font-size: .9375rem;
+}
+h5 {
+    font-size: .8125rem;
+}
+.card-header-title {
+    margin-bottom: 0;
+    text-align: left;
 
-<body>
-    <canvas></canvas>
-    <!-- 
-        o
-         \_/\o
-        ( Oo)                    \|/
-        (_=-)  .===O-  ~~Z~A~P~~ -O-
-        /   \_/U'                /|\
-        ||  |_/
-        \\  |
-        {K ||
-         | PP
-         | ||
-         (__\\
-        
-        
-        -->
-    <script>
-        "use strict";
-        ///////////////// worker thread code ///////////////////
-        const theLastExperience = (noWorkers) => {
-            "use strict";
-            // ---- robot structure ----
-            const struct = {
-                points: [
-                    {
-                        x: 0,
-                        y: -4,
-                        f(s, d) {
-                            this.y -= 0.01 * s * ts;
-                        },
-                    },
-                    {
-                        x: 0,
-                        y: -16,
-                        f(s, d) {
-                            this.y -= 0.02 * s * d * ts;
-                        },
-                    },
-                    {
-                        x: 0,
-                        y: 12,
-                        f(s, d) {
-                            this.y += 0.02 * s * d * ts;
-                        },
-                    },
-                    { x: -12, y: 0 },
-                    { x: 12, y: 0 },
-                    {
-                        x: -3,
-                        y: 34,
-                        f(s, d) {
-                            if (d > 0) {
-                                this.x += 0.01 * s * ts;
-                                this.y -= 0.015 * s * ts;
-                            } else {
-                                this.y += 0.02 * s * ts;
-                            }
-                        },
-                    },
-                    {
-                        x: 3,
-                        y: 34,
-                        f(s, d) {
-                            if (d > 0) {
-                                this.y += 0.02 * s * ts;
-                            } else {
-                                this.x -= 0.01 * s * ts;
-                                this.y -= 0.015 * s * ts;
-                            }
-                        },
-                    },
-                    {
-                        x: -28,
-                        y: 0,
-                        f(s, d) {
-                            this.x += this.vx * 0.025 * ts;
-                            this.y -= 0.001 * s * ts;
-                        },
-                    },
-                    {
-                        x: 28,
-                        y: 0,
-                        f(s, d) {
-                            this.x += this.vx * 0.025 * ts;
-                            this.y -= 0.001 * s * ts;
-                        },
-                    },
-                    {
-                        x: -3,
-                        y: 64,
-                        f(s, d) {
-                            this.y += 0.015 * s * ts;
-                            if (d > 0) {
-                                this.y -= 0.01 * s * ts;
-                            } else {
-                                this.y += 0.05 * s * ts;
-                            }
-                        },
-                    },
-                    {
-                        x: 3,
-                        y: 64,
-                        f(s, d) {
-                            this.y += 0.015 * s * ts;
-                            if (d > 0) {
-                                this.y += 0.05 * s * ts;
-                            } else {
-                                this.y -= 0.01 * s * ts;
-                            }
-                        },
-                    },
-                ],
-                links: [
-                    { p0: 3, p1: 7, size: 12, lum: 0.5 },
-                    { p0: 1, p1: 3, size: 24, lum: 0.5 },
-                    { p0: 1, p1: 0, size: 60, lum: 0.5, disk: 1 },
-                    { p0: 5, p1: 9, size: 16, lum: 0.5 },
-                    { p0: 2, p1: 5, size: 32, lum: 0.5 },
-                    { p0: 1, p1: 2, size: 50, lum: 1 },
-                    { p0: 6, p1: 10, size: 16, lum: 1.5 },
-                    { p0: 2, p1: 6, size: 32, lum: 1.5 },
-                    { p0: 4, p1: 8, size: 12, lum: 1.5 },
-                    { p0: 1, p1: 4, size: 24, lum: 1.5 },
-                ],
-            };
-            class Robot {
-                constructor(color, light, size, x, y, struct) {
-                    this.x = x;
-                    this.points = [];
-                    this.links = [];
-                    this.frame = 0;
-                    this.dir = 1;
-                    this.size = size;
-                    this.color = Math.round(color);
-                    this.light = light;
-                    // ---- create points ----
-                    for (const p of struct.points) {
-                        this.points.push(new Robot.Point(size * p.x + x, size * p.y + y, p.f));
-                    }
-                    // ---- create links ----
-                    for (const link of struct.links) {
-                        const p0 = this.points[link.p0];
-                        const p1 = this.points[link.p1];
-                        const dx = p0.x - p1.x;
-                        const dy = p0.y - p1.y;
-                        this.links.push(
-                            new Robot.Link(
-                                this,
-                                p0,
-                                p1,
-                                Math.sqrt(dx * dx + dy * dy),
-                                (link.size * size) / 3,
-                                link.lum,
-                                link.force,
-                                link.disk
-                            )
-                        );
-                    }
-                }
-                update() {
-                    if (++this.frame % Math.round(20 / ts) === 0) this.dir = -this.dir;
-                    if (this === pointer.dancerDrag && this.size < 16 && this.frame > 600) {
-                        pointer.dancerDrag = null;
-                        dancers.push(
-                            new Robot(
-                                this.color + 90,
-                                this.light * 1.25,
-                                this.size * 2,
-                                pointer.x,
-                                pointer.y - 100 * this.size * 2,
-                                struct
-                            )
-                        );
-                        dancers.sort(function (d0, d1) {
-                            return d0.size - d1.size;
-                        });
-                    }
-                    // ---- update links ----
-                    for (const link of this.links) link.update();
-                    // ---- update points ----
-                    for (const point of this.points) point.update(this);
-                    // ---- ground ----
-                    for (const link of this.links) {
-                        const p1 = link.p1;
-                        if (p1.y > canvas.height * ground - link.size * 0.5) {
-                            p1.y = canvas.height * ground - link.size * 0.5;
-                            p1.x -= p1.vx;
-                            p1.vx = 0;
-                            p1.vy = 0;
-                        }
-                    }
-                    // ---- center position ----
-                    this.points[3].x += (this.x - this.points[3].x) * 0.001;
-                }
-                draw() {
-                    for (const link of this.links) {
-                        if (link.size) {
-                            const dx = link.p1.x - link.p0.x;
-                            const dy = link.p1.y - link.p0.y;
-                            const a = Math.atan2(dy, dx);
-                            // ---- shadow ----
-                            ctx.save();
-                            ctx.translate(link.p0.x + link.size * 0.25, link.p0.y + link.size * 0.25);
-                            ctx.rotate(a);
-                            ctx.drawImage(link.shadow, -link.size * 0.5, -link.size * 0.5);
-                            ctx.restore();
-                            // ---- stroke ----
-                            ctx.save();
-                            ctx.translate(link.p0.x, link.p0.y);
-                            ctx.rotate(a);
-                            ctx.drawImage(link.image, -link.size * 0.5, -link.size * 0.5);
-                            ctx.restore();
-                        }
-                    }
-                }
-            }
-            Robot.Link = class Link {
-                constructor(parent, p0, p1, dist, size, light, force, disk) {
-                    this.p0 = p0;
-                    this.p1 = p1;
-                    this.distance = dist;
-                    this.size = size;
-                    this.light = light || 1.0;
-                    this.force = force || 0.5;
-                    this.image = this.stroke(
-                        "hsl(" + parent.color + " ,30%, " + parent.light * this.light + "%)",
-                        true,
-                        disk,
-                        dist,
-                        size
-                    );
-                    this.shadow = this.stroke("rgba(0,0,0,0.5)", false, disk, dist, size);
-                }
-                update() {
-                    const p0 = this.p0;
-                    const p1 = this.p1;
-                    const dx = p1.x - p0.x;
-                    const dy = p1.y - p0.y;
-                    const dist = Math.sqrt(dx * dx + dy * dy);
-                    if (dist > 0.0) {
-                        const tw = p0.w + p1.w;
-                        const r1 = p1.w / tw;
-                        const r0 = p0.w / tw;
-                        const dz = (this.distance - dist) * this.force;
-                        const sx = (dx / dist) * dz;
-                        const sy = (dy / dist) * dz;
-                        p1.x += sx * r0;
-                        p1.y += sy * r0;
-                        p0.x -= sx * r1;
-                        p0.y -= sy * r1;
-                    }
-                }
-                stroke(color, axis, disk, dist, size) {
-                    let image;
-                    if (noWorkers) {
-                        image = document.createElement("canvas");
-                        image.width = dist + size;
-                        image.height = size;
-                    } else {
-                        image = new OffscreenCanvas(dist + size, size);
-                    }
-                    const ict = image.getContext("2d");
-                    ict.beginPath();
-                    ict.lineCap = "round";
-                    ict.lineWidth = size;
-                    ict.strokeStyle = color;
-                    if (disk) {
-                        ict.arc(size * 0.5 + dist, size * 0.5, size * 0.5, 0, 2 * Math.PI);
-                        ict.fillStyle = color;
-                        ict.fill();
-                    } else {
-                        ict.moveTo(size * 0.5, size * 0.5);
-                        ict.lineTo(size * 0.5 + dist, size * 0.5);
-                        ict.stroke();
-                    }
-                    if (axis) {
-                        const s = size / 10;
-                        ict.fillStyle = "#000";
-                        ict.fillRect(size * 0.5 - s, size * 0.5 - s, s * 2, s * 2);
-                        ict.fillRect(size * 0.5 - s + dist, size * 0.5 - s, s * 2, s * 2);
-                    }
-                    return image;
-                }
-            };
-            Robot.Point = class Point {
-                constructor(x, y, fn, w) {
-                    this.x = x;
-                    this.y = y;
-                    this.w = w || 0.5;
-                    this.fn = fn || null;
-                    this.px = x;
-                    this.py = y;
-                    this.vx = 0.0;
-                    this.vy = 0.0;
-                }
-                update(robot) {
-                    // ---- dragging ----
-                    if (robot === pointer.dancerDrag && this === pointer.pointDrag) {
-                        this.x += (pointer.x - this.x) * 0.1;
-                        this.y += (pointer.y - this.y) * 0.1;
-                    }
-                    // ---- dance ----
-                    if (robot !== pointer.dancerDrag) {
-                        this.fn && this.fn(16 * Math.sqrt(robot.size), robot.dir);
-                    }
-                    // ---- verlet integration ----
-                    this.vx = this.x - this.px;
-                    this.vy = this.y - this.py;
-                    this.px = this.x;
-                    this.py = this.y;
-                    this.vx *= 0.995;
-                    this.vy *= 0.995;
-                    this.x += this.vx;
-                    this.y += this.vy + 0.01 * ts;
-                }
-            };
-            // ---- init ----
-            const dancers = [];
-            let ground = 1.0;
-            let canvas = { width: 0, height: 0, resize: true };
-            let ctx = null;
-            let pointer = { x: 0, y: 0, dancerDrag: null, pointDrag: null };
-            let ts = 1;
-            let lastTime = 0;
-            // ---- messages from the main thread ----
-            const message = (e) => {
-                switch (e.data.msg) {
-                    case "start":
-                        canvas.elem = e.data.elem;
-                        canvas.width = canvas.elem.width;
-                        canvas.height = canvas.elem.height;
-                        ctx = canvas.elem.getContext("2d");
-                        initRobots();
-                        requestAnimationFrame(run);
-                        break;
-                    case "resize":
-                        canvas.width = e.data.width;
-                        canvas.height = e.data.height;
-                        canvas.resize = true;
-                        break;
-                    case "pointerMove":
-                        pointer.x = e.data.x;
-                        pointer.y = e.data.y;
-                        break;
-                    case "pointerDown":
-                        pointer.x = e.data.x;
-                        pointer.y = e.data.y;
-                        for (const dancer of dancers) {
-                            for (const point of dancer.points) {
-                                const dx = pointer.x - point.x;
-                                const dy = pointer.y - point.y;
-                                const d = Math.sqrt(dx * dx + dy * dy);
-                                if (d < 60) {
-                                    pointer.dancerDrag = dancer;
-                                    pointer.pointDrag = point;
-                                    dancer.frame = 0;
-                                }
-                            }
-                        }
-                        break;
-                    case "pointerUp":
-                        pointer.dancerDrag = null;
-                        break;
-                }
-            };
-            // ---- resize screen ----
-            const resize = () => {
-                canvas.elem.width = canvas.width;
-                canvas.elem.height = canvas.height;
-                canvas.resize = false;
-                ground = canvas.height > 500 ? 0.85 : 1.0;
-                for (let i = 0; i < dancers.length; i++) {
-                    dancers[i].x = ((i + 2) * canvas.width) / 9;
-                }
-            };
-            // ---- main loop ----
-            const run = (time) => {
-                requestAnimationFrame(run);
-                if (canvas.resize === true) resize();
-                // ---- adjust speed to screen freq ----
-                if (lastTime !== 0) {
-                    const t = (time - lastTime) / 16;
-                    ts += (t - ts) * 0.1;
-                    if (ts > 1) ts = 1;
-                }
-                lastTime = time;
-                // ---- clear screen ----
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                ctx.fillStyle = "#222";
-                ctx.fillRect(0, 0, canvas.width, canvas.height * 0.15);
-                ctx.fillRect(0, canvas.height * 0.85, canvas.width, canvas.height * 0.15);
-                // ---- animate robots ----
-                for (const dancer of dancers) {
-                    dancer.update();
-                    dancer.draw();
-                }
-            };
-            const initRobots = () => {
-                // ---- instanciate robots ----
-                ground = canvas.height > 500 ? 0.85 : 1.0;
-                for (let i = 0; i < 6; i++) {
-                    dancers.push(
-                        new Robot(
-                            (i * 360) / 7,
-                            80,
-                            Math.sqrt(Math.min(canvas.width, canvas.height)) / 6,
-                            ((i + 2) * canvas.width) / 9,
-                            canvas.height * 0.5 - 100,
-                            struct
-                        )
-                    );
-                }
-            };
-            // ---- main thread vs. worker
-            if (noWorkers) {
-                // ---- emulate postMessage interface ----
-                return {
-                    postMessage(data) {
-                        message({ data: data });
-                    },
-                };
-            } else {
-                // ---- worker messaging ----
-                onmessage = message;
-            }
-        };
-        ///////////////// main thread code ///////////////////
-        let worker = null;
-        const createWorker = (fn) => {
-            const URL = window.URL || window.webkitURL;
-            return new Worker(URL.createObjectURL(new Blob(["(" + fn + ")()"])));
-        };
-        // ---- init canvas ----
-        const canvas = document.querySelector("canvas");
-        canvas.width = canvas.offsetWidth;
-        canvas.height = canvas.offsetHeight;
-        // ---- instanciate worker ----
-        if (window.Worker && window.OffscreenCanvas) {
-            // instanciating background worker from a function
-            worker = createWorker(theLastExperience);
-            // cloning OffscreenCanvas
-            const offscreen = canvas.transferControlToOffscreen();
-            // sending data to worker
-            worker.postMessage({ msg: "start", elem: offscreen }, [offscreen]);
-        } else {
-            // falling back execution to the main thread
-            worker = theLastExperience(true);
-            worker.postMessage({ msg: "start", elem: canvas });
-        }
-        // ---- resize event ----
-        window.addEventListener(
-            "resize",
-            () => {
-                worker.postMessage({
-                    msg: "resize",
-                    width: canvas.offsetWidth,
-                    height: canvas.offsetHeight,
-                });
-            },
-            false
-        );
-        // ---- pointer events ----
-        const pointer = {
-            x: 0,
-            y: 0,
-            down(e) {
-                this.move(e);
-                worker.postMessage({
-                    msg: "pointerDown",
-                    x: this.x,
-                    y: this.y,
-                });
-            },
-            up(e) {
-                worker.postMessage({
-                    msg: "pointerUp",
-                });
-            },
-            move(e) {
-                if (e.targetTouches) {
-                    e.preventDefault();
-                    this.x = e.targetTouches[0].clientX;
-                    this.y = e.targetTouches[0].clientY;
-                } else {
-                    this.x = e.clientX;
-                    this.y = e.clientY;
-                }
-                worker.postMessage({
-                    msg: "pointerMove",
-                    x: this.x,
-                    y: this.y,
-                });
-            },
-        };
-        window.addEventListener("mousemove", (e) => pointer.move(e), false);
-        canvas.addEventListener("touchmove", (e) => pointer.move(e), false);
-        window.addEventListener("mousedown", (e) => pointer.down(e), false);
-        window.addEventListener("touchstart", (e) => pointer.down(e), false);
-        window.addEventListener("mouseup", (e) => pointer.up(e), false);
-        window.addEventListener("touchend", (e) => pointer.up(e), false);
-    </script>
-    <style>
-        body,
-        html {
-            position: absolute;
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-        }
+}
+.card-fill .card-body {
+    flex-grow: 0;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+.card-body {
+    flex: 1 1 auto;
+    min-height: 1px;
+    padding: 1.5rem;
+}
+.list-group-flush {
+    border-radius: 0;
+}
+.list-group {
+    display: flex;
+    flex-direction: column;
+    padding-left: 0;
+    margin-bottom: 0;
+    border-radius: .375rem;
+}
+.list-group-flush>.list-group-item {
+    padding-left: 0;
+    padding-right: 0;
+}
+.list-group-flush>.list-group-item {
+    border-width: 0 0 1px;
+}
+.list-group-item:first-child {
+    border-top-left-radius: inherit;
+    border-top-right-radius: inherit;
+}
+.list-group-item {
+    position: relative;
+    display: block;
+    padding: 1rem 1.25rem;
+    background-color: transparent;
+    border: 1px solid #edf2f9;
+}
+.custom-switch {
+    min-height: 1.5rem;
+    padding-left: 3.5rem;
+}
+.custom-control {
+    position: relative;
+    z-index: 1;
+    display: block;
+    min-height: 1.40625rem;
+    padding-left: 1.5rem;
+}
+input[type=checkbox], input[type=radio] {
+    box-sizing: border-box;
+    padding: 0;
+}
+.custom-control-input {
+    position: absolute;
+    left: 0;
+    z-index: -1;
+    width: 1rem;
+    height: 1.20313rem;
+    opacity: 0;
+}
+button, input {
+    margin: 0;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    overflow: visible;
+}
+.custom-control-label {
+    position: relative;
+    margin-bottom: 0;
+    vertical-align: top;
+    cursor: pointer;
+    display: inline-block;
+}
+.custom-switch .custom-control-label::before {
+    left: -3.5rem;
+    width: 3rem;
+    pointer-events: all;
+    border-radius: .5625rem;
+}
+.custom-switch .custom-control-label::before {
+    top: 0;
+    height: 1.5rem;
+    border-radius: .75rem;
+}
+.custom-control-label::before, .custom-file-label, .custom-select {
+    transition: background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+.custom-control-label::before {
+    position: absolute;
+    top: .20313rem;
+    left: -1.5rem;
+    display: block;
+    width: 1rem;
+    height: 1rem;
+    pointer-events: none;
+    content: "";
+    background-color: #e3ebf6;
+    border: #b1c2d9 solid 0;
+}
+.custom-switch .custom-control-label::after {
+    top: .20313rem;
+    left: -3.5rem;
+    width: 1.125rem;
+    height: 1.125rem;
+    background-color: #b1c2d9;
+    border-radius: .5625rem;
+    transition: transform .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+.custom-control-label::after {
+    position: absolute;
+    top: .20313rem;
+    left: -1.5rem;
+    display: block;
+    width: 1rem;
+    height: 1rem;
+    content: "";
+    background: no-repeat 50%/50% 50%;
+}
+.custom-switch .custom-control-label::after {
+    top: .1875rem;
+    left: -3.3125rem;
+    background-color: #fff;
+}
+.custom-switch .custom-control-input:checked~.custom-control-label::after {
+    background-color: #fff;
+    transform: translateX(1.5rem);
+}
+.custom-control-input:checked~.custom-control-label::before {
+    color: #fff;
+    border-color: #2c7be5;
+    background-color: #2c7be5;
+}
+.align-items-center {
+    align-items: center!important;
+}
+.justify-content-end {
+    justify-content: flex-end!important;
+}
+.d-flex {
+    display: flex!important;
+}
+.mr-3 {
+    margin-right: .75rem!important;
+}
+.mt-3 {
+    margin-top: .75rem!important;
+}
+.text-left {
+    text-align: left!important;
+}
+.small, small {
+    font-size: .8125rem;
+    font-weight: 400;
+}
+.text-primary {
+    color: #2c7be5!important;
+}
+.badge-soft-primary {
+    color: #2c7be5;
+    background-color: #d5e5fa;
+}
+.pl-3, .px-3 {
+    padding-left: .75rem!important;
+}
+.pr-3, .px-3 {
+    padding-right: .75rem!important;
+}
+.ml-3, .mx-3 {
+    margin-left: .75rem!important;
+}
+.badge {
+  vertical-align: middle;
+    display: inline-block;
+    padding: .33em .5em;
+    font-size: 76%;
+    font-weight: 400;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: .375rem;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+.bg-transparent {
+    background-color: transparent!important;
+}
+.close {
+    float: right;
+    font-size: 1.40625rem;
+    font-weight: 600;
+    line-height: 1;
+    color: #95aac9;
+    text-shadow: none;
+    opacity: .5;
+}
+a {
+    text-decoration: none;
+    background-color: transparent;
+}
+.mb-n4, .my-n4 {
+    margin-bottom: -1.5rem!important;
+}
+.mt-n4, .my-n4 {
+    margin-top: -1.5rem!important;
+}
+.mt-3, .my-3 {
+    margin-top: .75rem!important;
+}
+.pt-2, .py-2 {
+    padding-top: .375rem!important;
+}
+.mb-n3, .my-n3 {
+    margin-bottom: -.75rem!important;
+}
+ </style>
+  </head>
+ 
 
-        canvas {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: #000;
-            cursor: pointer;
-        }
-    </style>
-</body>
 
+  <body class="gm-openedornot">
+    <!-- <script>
+      (function(n, j, c, h, a, t) {
+        t = j.getElementsByTagName("head")[0];
+        a = j.createElement("script");
+        a.async = 1;
+        a.src = c + h;
+        a.onload = () => {
+          n._NC.init("9681677306622212", 15, "dev");
+        };
+        t.appendChild(a);
+      })(window, document, "https://pushly.s3.ap-south-1.amazonaws.com/lib/", "ninjachat.min.js");
+    </script> -->
+    <!-- <script src="/dist/ninjachat.js"></script> -->
+    <div class="row m-0">
+          <div class="w-300" style="width: 300px;">
+            <!-- Projects -->
+            <div class="card card-fill">
+              <a class="close closebtn" style="position: absolute;right: 10px;top: 5px;"><span>×</span></a>
+              <div class="card-header mt-3">
+                <!-- Title -->
+                <h4 class="card-header-title">
+                  Openedornot disabled
+                </h4>
+                <!-- Link -->
+                <div class="">
+                  <div class="custom-control custom-switch" size="sm">
+                    <input type="checkbox" class="custom-control-input" id="customSwitch1">
+                    <label class="custom-control-label" for="customSwitch1"></label>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body">
+                <!-- List group -->
+                <div class="list-group list-group-flush my-n4">
+                  <div class="list-group-item">
+                    <div class="row align-items-center">
+                      <div class="d-flex align-items-center">
+                        <div class="mr-3">                       
+                          <div><span class="fe fe-user"></span></div>
+                        </div>
+                        <div class="">                          
+                          <h5 class="">Openedornot is currently disabled for</h5>                          
+                          <h4 class="card-text text-body">
+                           sankar.kummari@500apps.com
+                          </h4>
+                        </div>
+                      </div>
+                      <div class="d-flex align-items-center mt-3">
+                        <div class="mr-3 bg-transparent">                       
+                          <div><span class="fe fe-help-circle"></span></div>
+                        </div>
+                        <div class="">                          
+                          <h5 class=" text-left">Help</h5>                         
+                        </div>
+                      </div>
+                    </div> <!-- / .row -->
+                  </div>
+
+                  <div class="list-group-item" style="border:0;">
+                    <div class="row align-items-center justify-content-end">                   
+                      <div class="d-flex align-items-center">                       
+                        <div class="">                          
+                          <h5 class=" text-left small">Version: <span>2.22.1</span> <a href="#" class="text-primary">(stable)</a></h5>                         
+                        </div>
+                      </div>
+                    </div> <!-- / .row -->
+                  </div>
+              </div> <!-- / .card-body -->
+            </div> <!-- / .card -->
+          </div>          
+        </div>
+      </div>
+  </body>
 </html>
+
+
+
+
+
+
+
+
+  <!-- enabled -->
+  <div class="row m-0 pt-3">
+    <div class="w-300" style="width: 300px;">
+      <!-- Projects -->
+      <div class="card card-fill">
+       <a class="close closebtn" style="position: absolute;right: 10px;top: 5px;"><span>×</span></a>
+        <div class="card-header mt-3">
+          <!-- Title -->
+          <h4 class="card-header-title">
+            Openedornot enabled
+          </h4>
+          <!-- Link -->
+          <div class="">
+            <div class="custom-control custom-switch" size="sm">
+              <input type="checkbox" class="custom-control-input" checked id="customSwitch1">
+              <label class="custom-control-label" for="customSwitch1"></label>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <!-- List group -->
+          <div class="list-group list-group-flush my-n4">
+            <div class="list-group-item">
+              <div class="align-items-center">
+                <div class="d-flex align-items-center">
+                  <div class="mr-3">                       
+                    <div><span class="fe fe-user"></span></div>
+                  </div>
+                  <div class="">                          
+                    <h4 class="">Account
+                  </div>
+                </div>
+
+                <div class="d-flex align-items-center mt-3">
+                  <div class="mr-3">                       
+                    <div><span class="fe fe-settings"></span></div>
+                  </div>
+                  <div class="">                          
+                    <h4 class="">Setting
+                  </div>
+                </div>
+
+                <div class="d-flex align-items-center mt-3">
+                  <div class="mr-3 bg-transparent">                       
+                    <div><span class="fe fe-help-circle"></span></div>
+                  </div>
+                  <div class="">                          
+                    <h4 class=" text-left">Help</h4>                         
+                  </div>
+                </div>
+              </div> <!-- / .row -->
+            </div>
+
+            <div class="list-group-item" style="border:0;">
+              <div class="align-items-center">
+                <div class="d-flex align-items-center">
+                  <div class="mr-3">                       
+                    <div><span class="fe fe-grid"></span></div>
+                  </div>
+                  <div class="">                          
+                    <h4 class="">Activity Dashboard <span class="badge badge-soft-primary px-3 ml-3">Pro</span>
+                  </div>
+                </div>
+
+                <div class="d-flex align-items-center mt-3">
+                  <div class="mr-3">                       
+                    <div><span class="fe fe-mail"></span></div>
+                  </div>
+                  <div class="">                          
+                    <h4 class="">Opened Emails <span class="badge badge-soft-primary px-3 ml-3">Pro</span>
+                  </div>
+                </div>
+<!-- 
+                <div class="d-flex align-items-center mt-3">
+                  <div class="mr-3">                       
+                    <div><span class="fe fe-settings"></span></div>
+                  </div>
+                  <div class="">                          
+                    <h4 class="">Unopened Emails <span class="badge badge-soft-primary px-3 ml-3">Pro</span>
+                  </div>
+                </div> -->
+                <div class="d-flex align-items-center mt-3">
+                  <div class="mr-3">                       
+                    <div><span class="fe fe-link-2"></span></div>
+                  </div>
+                  <div class="">                          
+                    <h4 class="">Click Report <span class="badge badge-soft-primary px-3 ml-3">Pro</span>
+                  </div>
+                </div>
+
+                <div class="d-flex align-items-center mt-3">
+                  <div class="mr-3 bg-transparent">                       
+                    <div><span class="fe fe-users"></span></div>
+                  </div>
+                  <div class="">                          
+                    <h4 class=" text-left">Team <span class="badge badge-soft-primary px-3 ml-3">Pro</span>
+                    </h4>                         
+                  </div>
+                </div>
+              </div> <!-- / .row -->
+            </div>
+
+
+
+
+
+        </div> <!-- / .card-body -->
+      </div> <!-- / .card -->
+    </div>          
+  </div>
+</div>
